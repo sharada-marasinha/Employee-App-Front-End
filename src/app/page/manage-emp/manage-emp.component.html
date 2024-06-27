@@ -4,20 +4,20 @@
 
   <div class="input-group mb-3">
     <span class="input-group-text" id="basic-addon1"></span>
-    <input type="text" class="form-control" placeholder="First Name" aria-label="Username" [(ngModel)]="firstName" aria-describedby="basic-addon1">
+    <input type="text" class="form-control" placeholder="First Name" aria-label="Username" [(ngModel)]="employeeObj.firstName" aria-describedby="basic-addon1">
   </div>
   <div class="input-group mb-3">
     <span class="input-group-text" id="basic-addon1"></span>
-    <input type="text" class="form-control" placeholder="Last Name" aria-label="Username" aria-describedby="basic-addon1">
+    <input type="text" class="form-control" placeholder="Last Name" [(ngModel)]="employeeObj.lastName" aria-label="Username" aria-describedby="basic-addon1">
   </div>
 
   <div class="input-group mb-3">
-    <input type="text" class="form-control" placeholder="email" aria-label="Recipient's username" aria-describedby="basic-addon2">
+    <input type="text" class="form-control" placeholder="email" [(ngModel)]="employeeObj.email" aria-label="Recipient's username" aria-describedby="basic-addon2">
     <span class="input-group-text" id="basic-addon2">.com</span>
   </div>
 
   <div class="input-group mb-3">
-    <select class="form-select" aria-label="Default select example">
+    <select class="form-select" aria-label="Default select example" id="department" [(ngModel)]="employeeObj.departmentId" >
       <option selected>Department</option>
       <option value="1">One</option>
       <option value="2">Two</option>
@@ -27,7 +27,7 @@
 
 
   <div class="input-group mb-3">
-    <select class="form-select" aria-label="Default select example">
+    <select class="form-select" aria-label="Default select example" [(ngModel)]="employeeObj.roleId">
       <option selected>Role</option>
       <option value="1">One</option>
       <option value="2">Two</option>
