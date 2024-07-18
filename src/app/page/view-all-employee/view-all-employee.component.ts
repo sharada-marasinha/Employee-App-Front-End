@@ -1,31 +1,34 @@
 import { CommonModule } from '@angular/common';
-import {  HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import Swal from 'sweetalert2';
+import { NavComponent } from '../../common/nav/nav.component';
 
 @Component({
   selector: 'app-view-all-employee',
   standalone: true,
-  imports: [HttpClientModule,FormsModule,CommonModule],
+  imports: [HttpClientModule, FormsModule, CommonModule, NavComponent],
   templateUrl: './view-all-employee.component.html',
   styleUrl: './view-all-employee.component.css'
 })
 export class ViewAllEmployeeComponent {
 
-  public employeeList:any;
+  public employeeList: any;
 
-  constructor(private http:HttpClient){
+
+
+  constructor(private http: HttpClient) {
     this.loadEmployeTable();
   }
 
-  loadEmployeTable(){
-      this.http.get("http://localhost:8080/emp-controller/get-all").subscribe(res=>{
-        this.employeeList=res;
-        console.log(res);
-      })
+  loadEmployeTable() {
+    this.http.get("http://localhost:8080/emp-controller/get-all").subscribe(res => {
+      this.employeeList = res;
+      console.log(res);
+    })
   }
-  deleteEmploye(employe:any){
+  deleteEmploye(employe: any) {
 
     const swalWithBootstrapButtons = Swal.mixin({
       customClass: {
@@ -45,7 +48,7 @@ export class ViewAllEmployeeComponent {
     }).then((result) => {
       if (result.isConfirmed) {
 
-        this.http.delete(`http://localhost:8080/emp-controller/delete-emp/${employe.id}`,{responseType:'text'}).subscribe(res=>{
+        this.http.delete(`http://localhost:8080/emp-controller/delete-emp/${employe.id}`, { responseType: 'text' }).subscribe(res => {
           this.loadEmployeTable()
           swalWithBootstrapButtons.fire({
             title: "Deleted!",
@@ -69,8 +72,22 @@ export class ViewAllEmployeeComponent {
         });
       }
     });
+  }
 
+  public selectedEmployee: any = {
+    "id": null,
+    "firstName": null,
+    "lastName": null,
+    "email": null,
+    "departmentId": null,
+    "roleId": null
+  };
 
+  updateEmploye(employe: any) {
+    
+    this.selectedEmployee = employe;
+
+    console.log(employe);
 
   }
 }
