@@ -84,10 +84,18 @@ export class ViewAllEmployeeComponent {
   };
 
   updateEmploye(employe: any) {
-    
-    this.selectedEmployee = employe;
+
+    if(employe!=null){
+      this.selectedEmployee = employe;
+    }
 
     console.log(employe);
 
+  }
+
+  saveUpdateEmployee(){
+    this.http.put("http://localhost:8080/emp-controller/update-employee", this.selectedEmployee).subscribe(res => {
+      console.log("updated!");
+    })
   }
 }
