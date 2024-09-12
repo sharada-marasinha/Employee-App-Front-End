@@ -19,8 +19,8 @@
       <td>{{"EMP#000"+employee.id}}</td>
       <td>{{employee.firstName+" "+employee.lastName}}</td>
       <td>{{employee.email}}</td>
-      <td>{{employee.departmentId}}</td>
-      <td>{{employee.roleId}}</td>
+      <td>{{getDepartmentNames(employee.departmentList)}}</td>
+      <td>{{employee.role.name}}</td>
       <td><button class="btn btn-danger" (click)="deleteEmploye(employee)"><i class="bi bi-trash3-fill"></i></button>
       </td>
       <td><button class="btn btn-primary" (click)="updateEmploye(employee)" data-bs-toggle="modal"
@@ -71,6 +71,4 @@
     </div>
   </div>
 </div>
-
-<app-manage-emp></app-manage-emp>
 

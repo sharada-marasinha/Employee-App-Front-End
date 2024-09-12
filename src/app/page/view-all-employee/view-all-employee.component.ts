@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import Swal from 'sweetalert2';
@@ -23,8 +23,16 @@ export class ViewAllEmployeeComponent {
     this.loadEmployeTable();
   }
 
+  getDepartmentNames(departmentList:any[]):string{
+    return departmentList.map(dept=>dept.name).join(', ');
+  }
+
   loadEmployeTable() {
-    this.http.get("http://localhost:8080/emp-controller/get-all").subscribe(res => {
+    const headers = new HttpHeaders({
+      'Content-Type':'Application/json',
+      'Authorization':'Basic c2FtYW46MTIzNA=='
+    });
+    this.http.get("http://localhost:8080/emp-controller/get-all",{headers}).subscribe(res => {
       this.employeeList = res;
       console.log(res);
     })

@@ -59,6 +59,14 @@ export class ManageEmpComponent {
           icon: "success"
         });
 
+      },(error)=>{
+        console.log(error);
+        Swal.fire({
+          title: "Error!",
+          text: error.error?.massage||"There was an issue adding the employee!",
+          icon: "error"
+        });
+
       }
     )
 
