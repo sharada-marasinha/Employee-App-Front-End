@@ -38,6 +38,10 @@ export class ViewAllEmployeeComponent {
     })
   }
   deleteEmploye(employe: any) {
+    const headers = new HttpHeaders({
+      'Content-Type':'Application/json',
+      'Authorization':'Basic c2FtYW46MTIzNA=='
+    });
 
     const swalWithBootstrapButtons = Swal.mixin({
       customClass: {
@@ -57,7 +61,7 @@ export class ViewAllEmployeeComponent {
     }).then((result) => {
       if (result.isConfirmed) {
 
-        this.http.delete(`http://localhost:8080/emp-controller/delete-emp/${employe.id}`, { responseType: 'text' }).subscribe(res => {
+        this.http.delete(`http://localhost:8080/emp-controller/delete-emp/${employe.id}`, { responseType: 'text',headers }).subscribe(res => {
           this.loadEmployeTable()
           swalWithBootstrapButtons.fire({
             title: "Deleted!",
