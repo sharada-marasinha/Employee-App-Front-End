@@ -4,11 +4,12 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { NavComponent } from '../../common/nav/nav.component';
+import { ManageEmpComponent } from "../manage-emp/manage-emp.component";
 
 @Component({
   selector: 'app-view-all-employee',
   standalone: true,
-  imports: [HttpClientModule, FormsModule, CommonModule, NavComponent],
+  imports: [HttpClientModule, FormsModule, CommonModule, NavComponent, ManageEmpComponent],
   templateUrl: './view-all-employee.component.html',
   styleUrl: './view-all-employee.component.css'
 })
@@ -84,18 +85,29 @@ export class ViewAllEmployeeComponent {
   };
 
   updateEmploye(employe: any) {
-
     if(employe!=null){
       this.selectedEmployee = employe;
     }
-
     console.log(employe);
-
   }
 
   saveUpdateEmployee(){
-    this.http.put("http://localhost:8080/emp-controller/update-employee", this.selectedEmployee).subscribe(res => {
-      console.log("updated!");
-    })
+    Swal.fire({
+      title: "Do you want to save the changes?",
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: "Save",
+      denyButtonText: `Don't save`
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        Swal.fire("Saved!", "", "success");
+        this.http.put("http://localhost:8080/emp-controller/update-employee", this.selectedEmployee).subscribe(res => {
+          console.log("updated!");
+        })
+      } else if (result.isDenied) {
+        Swal.fire("Changes are not saved", "", "info");
+      }
+    });
   }
 }

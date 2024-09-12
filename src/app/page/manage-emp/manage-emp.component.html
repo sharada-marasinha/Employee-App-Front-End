@@ -3,6 +3,10 @@
 <div class="container m-5">
   <div class="input-group mb-3">
     <span class="input-group-text" id="basic-addon1"></span>
+    <input type="text" class="form-control" placeholder="ID" aria-label="ID" [(ngModel)]="empId" aria-describedby="basic-addon1">
+  </div>
+  <div class="input-group mb-3">
+    <span class="input-group-text" id="basic-addon1"></span>
     <input type="text" class="form-control" placeholder="First Name" aria-label="Username" [(ngModel)]="employeeObj.firstName" aria-describedby="basic-addon1">
   </div>
   <div class="input-group mb-3">
@@ -16,7 +20,7 @@
   </div>
 
   <div class="input-group mb-3">
-    <select class="form-select" aria-label="Default select example" id="department" [(ngModel)]="employeeObj.departmentId" >
+    <select class="form-select" aria-label="Default select example" id="department" [(ngModel)]="employeeObj.departmentList[0].name" >
       <option value="">Select the Department </option>
       <option value="No Department">No Department</option>
       <option value="Product Development">Product Development</option>
@@ -34,7 +38,7 @@
 
 
   <div class="input-group mb-3">
-    <select class="form-select" aria-label="Default select example" [(ngModel)]="employeeObj.roleId">
+    <select class="form-select" aria-label="Default select example" [(ngModel)]="employeeObj.role.name">
       <option value="">Select the Role</option>
       <option value="No Role">No Role</option>
       <option value="Software Developer/Engineer">Software Developer/Engineer</option>
